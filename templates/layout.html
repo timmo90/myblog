@@ -2,10 +2,10 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="shortcut icon" href="{{urlfor('static', filename = 'myblog.png')}}">
+	<link rel="shortcut icon" href="{{url_for('static', filename = 'myblog.png')}}">
 	{% block htmlheader %}
 	<title>{% block title %}Home {% endblock %} | blog for {{config.AUTHOR}} </title>
-	<link rel="stylesheet" type="text/css" href="{{urlfor('static', filename = 'style.css')">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
 	{% endblock %}
 </head>
 <body>

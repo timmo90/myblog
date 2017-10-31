@@ -14,6 +14,6 @@ from models import Article, Tag
 
 @app.route('/')
 def index():
-	pagination = Article.query.order_by(Article.id.desc()).pagination(1, 
+	pagination = Article.query.order_by(Article.id.desc()).paginate(1, 
 		per_page = config.MYBLOG_ARTICLE_PER_PAGE, error_out = False)
 	return render_template('index.html', pagination = pagination)
