@@ -33,3 +33,9 @@ def about():
 def tags():
 	tags = Tag.query.all()
 	return render_template('tags.html', tags = tags)
+
+@app.route('/tag/<id>')
+def tag(id):
+	tag = Tag.query.get_or_404(id)
+	articles = tag.articles.all()
+	return render_template('tag.html', tag = tag, articles = articles)
