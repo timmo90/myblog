@@ -22,3 +22,14 @@ def index():
 def article(id):
 	article = Article.query.get_or_404(id)
 	return render_template('page.html', article = article)
+
+
+@app.route('/about')
+def about():
+	return render_template('about_me.html')
+
+
+@app.route('/tags')
+def tags():
+	tags = Tag.query.all()
+	return render_template('tags.html', tags = tags)

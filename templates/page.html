@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block title %}article{% endblock %}
 {% block body %}
-<b>{{article.title}}</b>
+<h3><b>{{article.title}}</b></h3>
 <br>
 {{article.content|safe}}
 {% if article.pub_time %}
