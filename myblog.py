@@ -39,3 +39,16 @@ def tag(id):
 	tag = Tag.query.get_or_404(id)
 	articles = tag.articles.all()
 	return render_template('tag.html', tag = tag, articles = articles)
+
+@app.errorhandler(404)
+def page_not_found(error):
+	title = unicode(error)
+	message = error.description
+	return render_template('error.html', title = title, message = message)
+
+
+@app.errorhandler(500)
+def page_not_found(error):
+	title = unicode(error)
+	message = error.description
+	return render_template('error.html', title = title, message = message)
