@@ -40,3 +40,16 @@ class Tag(db.Model):
 		self.name = name.lower()
 		
 
+def create_article(title, summary, content, pub_time = None, tagnames = []):
+	article = Article(title, summary, content, pub_time)
+	tagnames = ['Java', 'Python']
+	for tag in tagnames:
+		tag_in_db = Tag.query.filter_by(name = tag).first()
+		if not tag_in_db:
+			tag_in_db = Tag(tag)
+			db.session.add(tag_in_db)
+			db.session.commit()
+		article.tags.append(tag_in_db)
+	db.session.add(article)
+	db.session.commit()
+

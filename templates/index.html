@@ -3,7 +3,7 @@
 {% block body %}
 {% for entry in pagination.items %}
 <div class="entry-overview">
-	<div class="date">{{format_date(entry.pub_time)}}</div>
+	<div class="date">{{format_datetime(entry.pub_time)}}</div>
 	<div class="detail">
 		<h1><a href="/article/{{entry.id}}">{{entry.title}}</a></h1>
 		{% if entry.summary %}

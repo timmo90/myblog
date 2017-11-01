@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block title %}article{% endblock %}
+{% block body %}
+<b>{{article.title}}</b>
+<br>
+{{article.content|safe}}
+{% if article.pub_time %}
+<p class="page-date">Written on {{article.pub_time}}</p>
+{% endif %}
+
+{% if article.tags %}
+<p class="page-tags">
+	This article was tagged
+{% for tag in article.tags %}
+	{% if not loop.first and not loop.last %}, {% endif %}
+	{% if loop.last and not loop.first %} and {% endif %}
+	<a href="/tags/{{tag.id}}">{{tag.name}}</a>
+{% endfor %}
+</p>
+{% endif %}
+{% endblock %}
