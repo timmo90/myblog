@@ -5,7 +5,9 @@
 {% block body %}
 <p>
 	{% if get_flashed_messages()%}
-	{{get_flashed_messages()}}
+	{% for message in get_flashed_messages() %}
+	{{message}}
+	{% endfor %}
 	{% endif %}
 </p>
 <h3>Write down your thoughts</h3>
