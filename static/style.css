@@ -109,3 +109,7 @@ div.adspace {
 div.adspace iframe {
     margin: 25px auto 25px auto;
 }
+
+div #summary {height: 50px; width: 1000px}
+
+div #content {height: 300px; width: 1000px}

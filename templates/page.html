@@ -14,7 +14,7 @@
 {% for tag in article.tags %}
 	{% if not loop.first and not loop.last %}, {% endif %}
 	{% if loop.last and not loop.first %} and {% endif %}
-	<a href="/tags/{{tag.id}}">{{tag.name}}</a>
+	<a href="/tag/{{tag.id}}">{{tag.name}}</a>
 {% endfor %}
 </p>
 {% endif %}

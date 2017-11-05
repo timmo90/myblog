@@ -22,12 +22,28 @@ class Article(db.Model):
 		backref = db.backref('articles', lazy = 'dynamic'))
 
 
-	def __init__(self, title, summary, content, pub_time = None):
+	def __init__(self, title, summary, content, tags = [], pub_time = None):
 		self.title = title
-		self.summary = summary
+
+		if summary:
+			self.summary = summary
+		else:
+			self.summary = content[:120]
+
 		self.content = content
+
+		for tag in tags:
+			tag_in_db = Tag.query.filter_by(name = tag).first()
+			if not tag_in_db:
+				tag_in_db = Tag(tag)
+				db.session.add(tag_in_db)
+				db.session.commit()
+			self.tags.append(tag_in_db)
 		if pub_time:
 			self.pub_time = pub_time
+
+		db.session.add(self)
+		db.session.commit()
 
 
 class Tag(db.Model):

@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title%}Publish{% endblock %}
+{% block body %}
+<p>
+	{% if get_flashed_messages()%}
+	{{get_flashed_messages()}}
+	{% endif %}
+</p>
+<h3>Write down your thoughts</h3>
+{{wtf.quick_form(form)}}
+{% endblock %}

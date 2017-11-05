@@ -1,5 +1,6 @@
 # -*-coding: utf-8 -*-
 # created by timmo on 2017/10/29
+# python manage.py shell
 
 # from myblog import app, db
 # from models import Article, Tag #it's necessary to import object
