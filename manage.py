@@ -34,5 +34,5 @@
 # 		article = Article(title, summary, content, [tag])
 
 # if __name__ == '__main__':
-# 	generate_fake_data(50)
+# 	generate_fake_data(100)
 # 	print 'generate fake data sucessful' 

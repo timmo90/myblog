@@ -2,7 +2,7 @@
 {% block title %}article{% endblock %}
 {% block body %}
 <h3><b>{{article.title}}</b></h3>
-<br>
+<h4>  summary:  {{article.summary|safe}}</h4>
 {{article.content|safe}}
 {% if article.pub_time %}
 <p class="page-date">Written on {{article.pub_time}}</p>

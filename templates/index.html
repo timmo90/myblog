@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
+{% import "_macros.html" as macros %}
 {% block title %}Blog{% endblock %}
 {% block body %}
+<h3>All Blogs</h3>
 {% for article in pagination.items %}
 <div class="entry-overview">
 	<div class="date">{{format_datetime(article.pub_time)}}</div>
@@ -12,4 +14,9 @@
 	</div>
 </div>
 {% endfor %}
+{% if pagination %}
+<div class="pagination">
+	{{macros.pagination_widget(pagination, 'index')}}
+</div>
+{% endif %}
 {% endblock %}

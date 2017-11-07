@@ -1,8 +1,12 @@
 {% extends 'layout.html' %}
+{% import '_macros.html' as macros %}
 {% block title %}Tags{% endblock %}
 {% block body %}
 <h3>All tags</h3>
-{% for tag in tags %}
+{% for tag in pagination.items %}
 <p><a href="/tag/{{tag.id}}">{{tag.name}}</a></p>
 {% endfor %}
+{% if pagination %}
+{{macros.pagination_widget(pagination, 'tags')}}
+{% endif %}
 {% endblock %}

@@ -1,8 +1,9 @@
 {% extends 'layout.html' %}
+{% import '_macros.html' as macros %}
 {% block title %}{{tag.name}}{% endblock %}
 {% block body %}
 <h3>All articles tagged {{tag.name}}</h3>
-{% for article in articles %}
+{% for article in pagination.items %}
 <div class="entry-overview">
 	<div class="date">{{format_datetime(article.pub_time)}}</div>
 	<div class="detail">
@@ -13,4 +14,7 @@
 	</div>
 </div>
 {% endfor %}
+{% if pagination %}
+{{macros.pagination_widget(pagination, 'tag', id = tag.id)}}
+{% endif %}
 {% endblock %}

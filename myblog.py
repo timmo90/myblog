@@ -1,7 +1,7 @@
 # -*-coding: utf-8 -*-
 # created by timmo on 2017/10/29
 
-from flask import Flask, render_template, url_for, redirect, flash
+from flask import Flask, render_template, url_for, redirect, flash, request
 from flask_bootstrap import Bootstrap 
 import config
 from flask_sqlalchemy import SQLAlchemy
@@ -17,7 +17,8 @@ import utils
 
 @app.route('/')
 def index():
-	pagination = Article.query.order_by(Article.id.desc()).paginate(1, 
+	page = request.args.get('page', 1, type = int)
+	pagination = Article.query.order_by(Article.pub_time.desc()).paginate(page, 
 		per_page = config.MYBLOG_ARTICLE_PER_PAGE, error_out = False)
 	return render_template('index.html', pagination = pagination)
 
@@ -34,14 +35,20 @@ def about():
 
 @app.route('/tags')
 def tags():
-	tags = Tag.query.all()
-	return render_template('tags.html', tags = tags)
+	page = request.args.get('page', 1, type = int)
+	pagination = Tag.query.order_by(Tag.id.desc()).paginate(page, per_page = 
+		config.MYBLOG_ARTICLE_PER_PAGE, error_out = False)
+	return render_template('tags.html', pagination = pagination)
 
 @app.route('/tag/<id>')
 def tag(id):
 	tag = Tag.query.get_or_404(id)
-	articles = tag.articles.all()
-	return render_template('tag.html', tag = tag, articles = articles)
+	# articles = tag.articles.all()
+	page = request.args.get('page', 1, type = int)
+	pagination = tag.articles.order_by(Article.pub_time.desc()).paginate(page,
+		per_page = config.MYBLOG_ARTICLE_PER_PAGE, error_out = False)
+	# articles = pagination.items
+	return render_template('tag.html', tag = tag, pagination = pagination)
 
 
 @app.route('/publish', methods = ['GET', 'POST'])

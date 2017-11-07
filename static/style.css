@@ -113,3 +113,19 @@ div.adspace iframe {
 div #summary {height: 50px; width: 1000px}
 
 div #content {height: 200px; width: 1000px}
+
+div.pagination {
+    display: inline;
+    width: 100%;
+    text-align: right;
+    padding: 0px;
+    margin: 0px;
+}
+
+/*li.disabled{
+display: none;
+}
+
+li.active{
+background: green;
+}*/
