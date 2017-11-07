@@ -114,18 +114,24 @@ div #summary {height: 50px; width: 1000px}
 
 div #content {height: 200px; width: 1000px}
 
-div.pagination {
-    display: inline;
+ul.pagination {
+    display: inline-block;
     width: 100%;
     text-align: right;
     padding: 0px;
     margin: 0px;
 }
 
-/*li.disabled{
-display: none;
+ul.pagination li {
+  display: inline;
 }
 
-li.active{
-background: green;
-}*/
+ul.pagination li a {
+  color: black;
+  float: middle;
+  padding: 8px 16px
+}
+
+li.active {
+  background: green;
+}
