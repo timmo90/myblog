@@ -5,14 +5,19 @@ from flask import Flask, render_template, url_for, redirect, flash, request
 from flask_bootstrap import Bootstrap 
 import config
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import or_, distinct
 from form import PublishForm
+from flask_admin import Admin, AdminIndexView
+from flask_basicauth import BasicAuth 
 
 app = Flask(__name__)
 app.config.from_object(config)
 db = SQLAlchemy(app)
 bootstrap = Bootstrap(app)
+basic_auth = BasicAuth(app)
+admin = Admin(app, name=u'admin', index_view=AdminIndexView(name=u'Index', template='admin_index.html'))
 
-from models import Article, Tag, create_article
+from models import Article, Tag, create_article, articles_tags
 import utils
 
 @app.route('/')
@@ -27,11 +32,9 @@ def article(id):
 	article = Article.query.get_or_404(id)
 	return render_template('page.html', article = article)
 
-
 @app.route('/about')
 def about():
 	return render_template('about_me.html')
-
 
 @app.route('/tags')
 def tags():
@@ -50,7 +53,6 @@ def tag(id):
 	# articles = pagination.items
 	return render_template('tag.html', tag = tag, pagination = pagination)
 
-
 @app.route('/publish', methods = ['GET', 'POST'])
 def publish():
 	form = PublishForm()
@@ -68,13 +70,11 @@ def publish():
 			form.publish_code.data = ''
 	return render_template('publish.html', form = form)
 
-
 @app.errorhandler(404)
 def page_not_found(error):
 	title = unicode(error)
 	message = error.description
 	return render_template('error.html', title = title, message = message)
-
 
 @app.errorhandler(500)
 def internal_server_error(error):
@@ -82,10 +82,12 @@ def internal_server_error(error):
 	message = error.description
 	return render_template('error.html', title = title, message = message)
 
-
 @app.errorhandler(502)
 def bad_gateway(error):
 	title = unicode(error)
 	message = error.description
 	return render_template('error.html', title = title, message = message)
 	
+from views import *
+
+admin.add_view(ArticleView(Article, db.session, name=u'Article'))
