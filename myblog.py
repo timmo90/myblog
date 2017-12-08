@@ -91,3 +91,4 @@ def bad_gateway(error):
 from views import *
 
 admin.add_view(ArticleView(Article, db.session, name=u'Article'))
+admin.add_view(CreateArticle(name='Create'))
