@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
-<body>
+{% extends 'admin/master.html' %}
+{% block body %}
 <h3>Myblog - Admin</h3>
 <form action="{{create_url}}" method="post">
 Title:<br>
@@ -13,12 +9,11 @@ Summary:<br>
 <input type="text" name="summary">
 <br>
 Content:<br>
-<input type="text" name="content">
+<textarea rows="10", cols="30" name="content"></textarea>
 <br>
 Tags:<br>
 <input type="text" name="tags">
 <br>
 <input type="submit" value="Create">
 </form>
-</body>
-</html>
+{% endblock %}

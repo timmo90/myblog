@@ -27,7 +27,7 @@ class ArticleView(ModelView):
 class CreateArticle(BaseView):
 	@expose('/', methods=['GET', 'POST'])
 	def index(self):
-		return render_template('create_article.html', create_url = url_for('createarticle.create_article'))
+		return self.render('create_article.html', create_url = url_for('createarticle.create_article'))
 
 	@expose('/create_article', methods=['GET', 'POST'])
 	def create_article(self):
@@ -43,7 +43,7 @@ class CreateArticle(BaseView):
 			article = Article(title, summary, content, tags)
 			db.session.add(article)
 			db.session.commit()
-			return 'add article successfully'
+			return redirect('http://localhost:8228/admin/article/')
 		return redirect(url_for('createarticle.index'))
 
 
